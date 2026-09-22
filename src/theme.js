@@ -93,7 +93,10 @@ export const collectionAccentText = (category) => (collectionAccents[category] ?
 const { color: c, font } = tokens;
 
 const theme = createTheme({
-  cssVariables: { colorSchemeSelector: 'data' },
+  // Explicit attribute name (not the 'data' shorthand, which toggles a boolean
+  // `data-light`/`data-dark` attribute) so it matches the selector our own
+  // CssBaseline override and the inline <head> script both target.
+  cssVariables: { colorSchemeSelector: 'data-mui-color-scheme' },
   defaultColorScheme: 'dark',
   colorSchemes: {
     dark: {
