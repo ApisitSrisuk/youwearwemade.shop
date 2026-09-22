@@ -1,61 +1,100 @@
 import React from 'react';
-import { Box, Typography, Container, Grid, IconButton } from '@mui/material';
+import { Box, Typography, Container, IconButton } from '@mui/material';
 import { Instagram, Twitter, Facebook } from 'lucide-react';
+import Logo from './Logo';
+import { tokens } from '../theme';
+
+const { color, font } = tokens;
+
+const columns = [
+  { title: 'Shop', links: ['All Collections', 'Collection 01', 'Collection 02'] },
+  { title: 'Info', links: ['About Us', 'Contact', 'Shipping & Returns'] },
+];
+
+const socials = [
+  { label: 'Instagram', Icon: Instagram },
+  { label: 'Twitter', Icon: Twitter },
+  { label: 'Facebook', Icon: Facebook },
+];
+
+const headingSx = { color: color.lilacInk, mb: 2.5, display: 'block' };
 
 export default function Footer() {
   return (
-    <Box sx={{ borderTop: '1px solid rgba(255,255,255,0.05)', pt: 8, pb: 4, backgroundColor: '#050505' }}>
-      <Container maxWidth="lg">
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6" sx={{ fontFamily: '"Outfit", sans-serif', mb: 2, letterSpacing: '0.1em' }}>
-              YWWM.
-            </Typography>
-            <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 600 }}>OUR PHILOSOPHY</Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 2, maxWidth: 350, lineHeight: 1.8 }}>
+    <Box component="footer" sx={{ position: 'relative', overflow: 'hidden', borderTop: `2px solid ${color.strong}`, pt: { xs: 8, md: 10 }, backgroundColor: color.ink }}>
+      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
+        <Box sx={{ display: 'grid', gap: { xs: 5, md: 6 }, gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: '2fr 1fr 1fr 1fr' } }}>
+          <Box sx={{ gridColumn: { xs: '1 / -1', md: 'auto' } }}>
+            <Logo size="2.6rem" />
+            <Typography variant="overline" sx={{ ...headingSx, mt: 2.5, mb: 1.5 }}>Our philosophy</Typography>
+            <Typography sx={{ color: color.muted, maxWidth: 380, lineHeight: 1.8 }}>
               ทุก Collection ของเราถูกออกแบบจากช่วงเวลาและอารมณ์ในชีวิตประจำวัน ไม่ว่าจะเป็นความสุขในวันศุกร์ หรือแรงกดดันจากเดดไลน์
             </Typography>
-          </Grid>
-          <Grid item xs={12} sm={6} md={2}>
-            <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: 600 }}>Shop</Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-              <Typography variant="body2" color="text.secondary" sx={{ cursor: 'pointer', '&:hover': { color: '#fff' } }}>All Collections</Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ cursor: 'pointer', '&:hover': { color: '#fff' } }}>Collection 01</Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ cursor: 'pointer', '&:hover': { color: '#fff' } }}>Collection 02</Typography>
+          </Box>
+
+          {columns.map((col) => (
+            <Box key={col.title}>
+              <Typography variant="overline" sx={headingSx}>{col.title}</Typography>
+              <Box component="ul" sx={{ listStyle: 'none', m: 0, p: 0, display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+                {col.links.map((label) => (
+                  <Box
+                    component="li"
+                    key={label}
+                    sx={{
+                      color: color.muted, cursor: 'pointer', transition: 'color 0.2s ease, transform 0.2s ease', width: 'fit-content',
+                      '&:hover': { color: color.strong, transform: 'translateX(6px)' },
+                    }}
+                  >
+                    {label}
+                  </Box>
+                ))}
+              </Box>
             </Box>
-          </Grid>
-          <Grid item xs={12} sm={6} md={2}>
-            <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: 600 }}>Info</Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-              <Typography variant="body2" color="text.secondary" sx={{ cursor: 'pointer', '&:hover': { color: '#fff' } }}>About Us</Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ cursor: 'pointer', '&:hover': { color: '#fff' } }}>Contact</Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ cursor: 'pointer', '&:hover': { color: '#fff' } }}>Shipping & Returns</Typography>
+          ))}
+
+          <Box>
+            <Typography variant="overline" sx={headingSx}>Follow us</Typography>
+            <Box sx={{ display: 'flex', gap: 1.5 }}>
+              {socials.map((social) => {
+                const Icon = social.Icon;
+                return (
+                  <IconButton
+                    key={social.label}
+                    aria-label={social.label}
+                    sx={{ color: color.strong, border: `2px solid ${color.line}`, '&:hover': { backgroundColor: color.lilac, color: '#000', borderColor: color.strong } }}
+                  >
+                    <Icon size={20} />
+                  </IconButton>
+                );
+              })}
             </Box>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: 600 }}>Follow Us</Typography>
-            <Box sx={{ display: 'flex', gap: 1 }}>
-              <IconButton sx={{ color: 'text.secondary', '&:hover': { color: '#fff', backgroundColor: 'rgba(255,255,255,0.1)' } }}>
-                <Instagram size={20} />
-              </IconButton>
-              <IconButton sx={{ color: 'text.secondary', '&:hover': { color: '#fff', backgroundColor: 'rgba(255,255,255,0.1)' } }}>
-                <Twitter size={20} />
-              </IconButton>
-              <IconButton sx={{ color: 'text.secondary', '&:hover': { color: '#fff', backgroundColor: 'rgba(255,255,255,0.1)' } }}>
-                <Facebook size={20} />
-              </IconButton>
-            </Box>
-          </Grid>
-        </Grid>
-        <Box sx={{ borderTop: '1px solid rgba(255,255,255,0.05)', mt: 8, pt: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Typography variant="body2" color="text.secondary">
+          </Box>
+        </Box>
+
+        <Box
+          sx={{
+            borderTop: `2px solid ${color.line}`, mt: { xs: 6, md: 8 }, py: 3,
+            display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between', alignItems: { xs: 'flex-start', sm: 'center' }, gap: 1,
+          }}
+        >
+          <Typography variant="body2" sx={{ color: color.muted }}>
             &copy; {new Date().getFullYear()} YOU WEAR WE MADE &mdash; All rights reserved
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Designed with React + GSAP
-          </Typography>
+          <Typography variant="body2" sx={{ color: color.muted }}>Designed with React + GSAP</Typography>
         </Box>
       </Container>
+
+      {/* Oversized outline wordmark */}
+      <Typography
+        aria-hidden="true"
+        sx={{
+          fontFamily: font.display, fontWeight: 800, textTransform: 'uppercase', whiteSpace: 'pre-line', textAlign: 'center',
+          lineHeight: 0.85, fontSize: { xs: '9vw', md: '9.5vw' }, color: 'transparent', WebkitTextStroke: `2px ${color.line}`,
+          userSelect: 'none', mb: { xs: -1, md: -3 },
+        }}
+      >
+        {'You wear\nwe made'}
+      </Typography>
     </Box>
   );
 }

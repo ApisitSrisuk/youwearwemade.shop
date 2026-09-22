@@ -5,6 +5,14 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ywwm</title>
+    <script>
+      // Apply the saved colour scheme before first paint (matches MUI's `mui-mode` key).
+      try {
+        var m = localStorage.getItem('mui-mode') || 'dark';
+        if (m === 'system') m = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-mui-color-scheme', m);
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

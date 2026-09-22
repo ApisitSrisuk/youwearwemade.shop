@@ -30,7 +30,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ position: 'relative', minHeight: '100vh', backgroundColor: '#0a0a0a' }}>
+      <Box sx={{ position: 'relative', minHeight: '100vh', backgroundColor: 'background.default' }}>
         <CustomCursor />
         <Navbar cartItems={cartItems} removeFromCart={removeFromCart} />
         <Routes>

@@ -4,31 +4,25 @@
   --nav-height: 80px;
 }
 
+/* Colours come from the MUI theme (CssBaseline); these only cover the blank moment before it mounts. */
+html {
+  scroll-padding-top: var(--nav-height);
+  background-color: #0a0a0a;
+}
+html[data-mui-color-scheme='light'] {
+  background-color: #f6f2e9;
+}
+
 body, html {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100%;
-  background-color: #0a0a0a;
-  color: #fff;
+  min-height: 100%;
   font-family: 'Kanit', sans-serif;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 * {
   box-sizing: border-box;
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
-}
-::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 5px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
 }
